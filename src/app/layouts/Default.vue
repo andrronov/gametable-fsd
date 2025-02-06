@@ -1,13 +1,23 @@
 <script setup lang="ts">
-import { Header } from '@/widgets/app-header';
-import { usePlatform } from '@/shared/lib/composables/use-platform';
+import { Header } from "@/widgets/app-header";
+import { usePlatform } from "@/shared/lib/composables/use-platform";
 
 const { theme } = usePlatform();
 </script>
 
 <template>
-    <Header />
-    <div class="w-full h-screen flex flex-col p-4">
-        <slot />
-    </div>
+  <Header />
+  <div class="w-full h-screen flex flex-col p-4">
+    <slot />
+  </div>
 </template>
+
+<style>
+html[data-lock-scroll="true"] {
+  overflow: hidden;
+}
+
+html[data-lock-scroll="true"] body {
+  padding-right: var(--scrollbar-width);
+}
+</style>

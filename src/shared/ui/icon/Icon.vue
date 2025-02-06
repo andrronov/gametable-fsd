@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Icon } from "@iconify/vue";
+import { Icon as Iconif } from "@iconify/vue";
 
 defineProps<{
   name: string;
@@ -7,5 +7,5 @@ defineProps<{
 </script>
 
 <template>
-  <Icon :icon="name" v-bind="$attrs" />
+  <Iconif :icon="name" v-bind="$attrs" />
 </template>
