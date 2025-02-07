@@ -2,10 +2,12 @@
 import { ref } from "vue";
 import { useGames } from "@/entities/games/lib/use-games";
 import { useModal } from "@/shared/lib/composables/use-modal";
+import { isDefined } from "@/shared/lib/utils";
 import type { Game } from "@/shared/types";
-import { Modal, Input } from "@/shared/ui";
+import { SUPPORTED_PLATFORMS } from "@/shared/types";
+import { Modal, Input, Select, Range } from "@/shared/ui";
 
-type ArgType = number | undefined;
+type ArgType = Game | undefined;
 
 const { open: openGameModal, close: closeGameModal, show } = useModal();
 
@@ -22,7 +24,13 @@ const getDefaultGame = (): Game => ({
 const gameData = ref<Game>(getDefaultGame());
 
 const updateGameInfo = () => {};
-const handleGameModal = (arg: ArgType) => {openGameModal()};
+const handleGameModal = (arg: ArgType) => {
+  if (isDefined(arg)) {
+    gameData.value = arg;
+  }
+
+  openGameModal();
+};
 
 defineSlots<{
   default: (props: { openGameModal: (arg: ArgType) => void }) => void;
@@ -34,10 +42,16 @@ defineSlots<{
     <form @submit.prevent="updateGameInfo" class="flex flex-col gap-5">
       <span class="text-xl font-medium">Set game</span>
       <div class="flex flex-col gap-3">
-        <Input> Game name </Input>
-        <Input> Game name </Input>
-        <Input> Release Year </Input>
-        <Input> Rating </Input>
+        <Input v-model="gameData.name"> Game name </Input>
+        <Select
+          v-model="gameData.platform"
+          :options="Array.from(SUPPORTED_PLATFORMS)"
+          >Platform</Select
+        >
+        <Input v-model="gameData.releaseYear"> Release Year </Input>
+        <Range v-model="gameData.rating" :min="0" :max="10" :step="0.1"
+          >Rating</Range
+        >
       </div>
     </form>
   </Modal>

@@ -10,7 +10,8 @@ export type RangeTo<
   A extends number[] = [1],
 > = A["length"] extends N ? A[number] : RangeTo<N, [...A, A["length"]]>;
 
-export type Platform = "PC" | "Console" | "Mobile";
+export const SUPPORTED_PLATFORMS = ["PC", "Console", "Mobile"] as const;
+export type Platform = (typeof SUPPORTED_PLATFORMS)[number];
 
 export type Game = {
   id: number;
@@ -21,17 +22,17 @@ export type Game = {
 };
 
 export enum Keys {
-    Space = " ",
-    Enter = "Enter",
-    Escape = "Escape",
-    Backspace = "Backspace",
-    ArrowLeft = "ArrowLeft",
-    ArrowUp = "ArrowUp",
-    ArrowRight = "ArrowRight",
-    ArrowDown = "ArrowDown",
-    Home = "Home",
-    End = "End",
-    PageUp = "PageUp",
-    PageDown = "PageDown",
-    Tab = "Tab",
-  }
+  Space = " ",
+  Enter = "Enter",
+  Escape = "Escape",
+  Backspace = "Backspace",
+  ArrowLeft = "ArrowLeft",
+  ArrowUp = "ArrowUp",
+  ArrowRight = "ArrowRight",
+  ArrowDown = "ArrowDown",
+  Home = "Home",
+  End = "End",
+  PageUp = "PageUp",
+  PageDown = "PageDown",
+  Tab = "Tab",
+}

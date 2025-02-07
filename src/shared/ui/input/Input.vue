@@ -98,7 +98,7 @@ const handleInput = (e: InputEvent | Event) => {
     }"
   >
     <div class="flex items-end justify-between font-normal">
-      <span data-testid="ui/input-label" class="text-base-content/90">
+      <span class="text-base-content/90">
         <slot></slot>
       </span>
       <span class="text-sm text-base-content/50">
@@ -134,7 +134,6 @@ const handleInput = (e: InputEvent | Event) => {
         v-bind="attrs"
         @input="!lazy ? handleInput($event) : () => {}"
         @blur="lazy ? handleInput($event) : () => {}"
-        data-testid="ui/input"
         :dimmed="dimmed"
         :filled="filled"
         :type="type"
@@ -143,7 +142,6 @@ const handleInput = (e: InputEvent | Event) => {
         :inputmode="type === 'number' ? 'decimal' : undefined"
       />
       <button
-        data-testid="hide-password-button"
         v-if="!hideEye && isPassword"
         @click="togglePasswordVisibility()"
         class="-ml-8 cursor-pointer"
@@ -162,11 +160,7 @@ const handleInput = (e: InputEvent | Event) => {
     >
       {{ `${modelValue.length} / ${maxlength}` }}
     </span>
-    <span
-      v-if="errorMessage"
-      class="text-xs font-medium text-error"
-      data-testid="error-message"
-    >
+    <span v-if="errorMessage" class="text-xs font-medium text-error">
       {{ errorMessage }}
     </span>
   </label>
