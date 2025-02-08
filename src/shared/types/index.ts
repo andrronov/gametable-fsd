@@ -7,7 +7,7 @@ export type ComponentColor = ComponentBrandColors | "ghost" | ComponentStatus;
 
 export type RangeTo<
   N extends number,
-  A extends number[] = [1],
+  A extends number[] = [0],
 > = A["length"] extends N ? A[number] : RangeTo<N, [...A, A["length"]]>;
 
 export const SUPPORTED_PLATFORMS = ["PC", "Console", "Mobile"] as const;

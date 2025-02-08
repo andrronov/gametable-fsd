@@ -15,19 +15,7 @@ const { games } = useGames();
 
 <template>
   <GameModalProvider v-slot="{ openGameModal }">
-    <Button
-      :color="'secondary'"
-      :size="'lg'"
-      @click="
-        openGameModal({
-          id: 2,
-          name: 'pizda',
-          platform: 'Console',
-          rating: 9,
-          releaseYear: 2001,
-        })
-      "
-    >
+    <Button :color="'secondary'" :size="'lg'" @click="openGameModal()">
       Add game
     </Button>
     <GameTable :games @get-game-info="(game) => openGameModal(game)" />

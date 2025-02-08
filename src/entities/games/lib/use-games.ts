@@ -1,4 +1,5 @@
 import { useStorage } from "@vueuse/core";
+import { isDefined } from "@/shared/lib/utils";
 import type { Game } from "@/shared/types";
 
 export const useGames = () => {
@@ -12,11 +13,24 @@ export const useGames = () => {
   const deleteGame = (id: number) => {
     games.value = games.value.filter((game) => game.id !== id);
   };
+  const updateGame = (newGame: Game) => {
+    games.value = games.value.map((game) =>
+      game.id === newGame.id ? newGame : game,
+    );
+  };
+
+  const gameHandle = (game: Game) => {
+    if (isDefined(games.value.find((g) => g.id === game.id))) {
+      updateGame(game);
+    } else {
+      addGame(game);
+    }
+  };
 
   return {
     games,
-    addGame,
     deleteGame,
+    gameHandle,
     count,
   };
 };
