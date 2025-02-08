@@ -16,11 +16,11 @@ defineSlots<{
 
 const { open: openGameModal, close: closeGameModal, show } = useModal();
 
-const { count, gameHandle } = useGames();
+const { gameHandle, deleteGame } = useGames();
 
 const getDefaultGame = (): Game => ({
   id: 0,
-  name: "Game",
+  name: "New game",
   platform: "PC",
   rating: 0,
   releaseYear: getCurrentYear(),
@@ -63,9 +63,17 @@ const handleGameModal = (arg: ArgType) => {
   openGameModal();
 };
 
-const updateGame = (game: Game) => {
+const updateGame = () => {
   if (isValidGame.value) {
-    gameHandle(game);
+    gameHandle(gameData.value);
+    closeGameModal();
+  }
+};
+const removeGame = () => {
+  const userConfirm = confirm("You sure?");
+
+  if (userConfirm) {
+    deleteGame(gameData.value.id);
     closeGameModal();
   }
 };
@@ -73,7 +81,7 @@ const updateGame = (game: Game) => {
 
 <template>
   <Modal :open="show" @close="closeGameModal()">
-    <form @submit.prevent="updateGame(gameData)" class="flex flex-col gap-5">
+    <form @submit.prevent="updateGame()" class="flex flex-col gap-5">
       <span class="text-xl font-medium">Set game</span>
       <div class="flex flex-col gap-3">
         <Input v-model="gameData.name"> Game name </Input>
@@ -87,7 +95,10 @@ const updateGame = (game: Game) => {
           >Rating</Range
         >
       </div>
-      <Button :disabled="!isValidGame" type="submit"> Done </Button>
+      <div class="flex flex-col gap-2">
+        <Button :disabled="!isValidGame" type="submit"> Done </Button>
+        <Button color="error" size="sm" @click="removeGame"> Delete </Button>
+      </div>
     </form>
   </Modal>
 
