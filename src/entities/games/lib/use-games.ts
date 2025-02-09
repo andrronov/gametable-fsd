@@ -1,14 +1,17 @@
 import { useStorage } from "@vueuse/core";
+import { ref } from "vue";
 import { isDefined } from "@/shared/lib/utils";
 import type { Game } from "@/shared/types";
 
 export const useGames = () => {
   const games = useStorage("app-games", [] as Game[]);
-  let count = 0;
+  const count = useStorage("app-counter", 0);
 
   const addGame = (game: Game) => {
+    console.log(game.id);
     games.value.push(game);
-    count++;
+    count.value++;
+    console.log(game.id, "after");
   };
   const deleteGame = (id: number) => {
     games.value = games.value.filter((game) => game.id !== id);

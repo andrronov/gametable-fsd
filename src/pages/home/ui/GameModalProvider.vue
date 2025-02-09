@@ -16,10 +16,10 @@ defineSlots<{
 
 const { open: openGameModal, close: closeGameModal, show } = useModal();
 
-const { gameHandle, deleteGame } = useGames();
+const { count, gameHandle, deleteGame } = useGames();
 
 const getDefaultGame = (): Game => ({
-  id: 0,
+  id: count.value,
   name: "New game",
   platform: "PC",
   rating: 0,

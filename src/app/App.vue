@@ -5,7 +5,7 @@ import { layouts, type Layout } from "./layouts";
 
 const route = useRoute();
 
-const routeLayout = computed(() => route.meta.layout as Layout)
+const routeLayout = computed(() => route.meta.layout as Layout);
 </script>
 
 <template>
@@ -13,5 +13,3 @@ const routeLayout = computed(() => route.meta.layout as Layout)
     <router-view />
   </component>
 </template>
-
-<style></style>

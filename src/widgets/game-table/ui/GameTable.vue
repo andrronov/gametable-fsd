@@ -18,7 +18,10 @@ const emit = defineEmits<{
       <p class="text-secondary text-2xl font-semibold">There's no games yet</p>
     </div>
   </template>
-  <table v-else class="min-w-full bg-base-100 border border-base-200 rounded-lg text-base-content">
+  <table
+    v-else
+    class="min-w-full bg-base-100 border border-base-200 rounded-lg text-base-content"
+  >
     <thead>
       <tr class="bg-base-100 border-b">
         <th class="py-2 px-4 text-left w-1/3">Name</th>
