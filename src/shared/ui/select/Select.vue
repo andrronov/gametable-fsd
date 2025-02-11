@@ -1,15 +1,21 @@
 <script setup lang="ts">
+import { useAttrs } from "vue";
+
 defineProps<{
-  readonly options: Array<string>;
+  readonly options: Array<string | number>;
 }>();
 
-const modelValue = defineModel<string>({
+const attrs = useAttrs();
+
+const modelValue = defineModel<string | number>({
   default: undefined,
 });
 
 const handleInput = (event: Event) => {
-  const target = event.target as HTMLSelectElement;
-  modelValue.value = target.value;
+  const targetValue = (event.target as HTMLSelectElement).value;
+
+  modelValue.value =
+    attrs.type === "Number" ? Number(targetValue) : targetValue;
 };
 </script>
 

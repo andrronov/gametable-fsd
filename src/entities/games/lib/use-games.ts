@@ -1,17 +1,15 @@
 import { useStorage } from "@vueuse/core";
 import { ref } from "vue";
 import { isDefined } from "@/shared/lib/utils";
-import type { Game } from "@/shared/types";
+import type { Game, ParamQuery, PerPage } from "@/shared/types";
 
 export const useGames = () => {
   const games = useStorage("app-games", [] as Game[]);
   const count = useStorage("app-counter", 0);
 
   const addGame = (game: Game) => {
-    console.log(game.id);
     games.value.push(game);
     count.value++;
-    console.log(game.id, "after");
   };
   const deleteGame = (id: number) => {
     games.value = games.value.filter((game) => game.id !== id);
@@ -21,6 +19,7 @@ export const useGames = () => {
       game.id === newGame.id ? newGame : game,
     );
   };
+  const deleteAll = () => (games.value = []);
 
   const gameHandle = (game: Game) => {
     if (isDefined(games.value.find((g) => g.id === game.id))) {
@@ -30,10 +29,22 @@ export const useGames = () => {
     }
   };
 
+  // bad practice, i know :/
+  const getGamesPerPage = (params: ParamQuery) => {
+    const pageValue = params.page * params.perPage;
+    return games.value.slice(pageValue - params.perPage, pageValue);
+  };
+  const possiblePages = (perPage: PerPage) => {
+    return Math.ceil(games.value.length / perPage);
+  };
+
   return {
+    count,
     games,
     deleteGame,
+    deleteAll,
     gameHandle,
-    count,
+    getGamesPerPage,
+    possiblePages,
   };
 };

@@ -20,7 +20,7 @@ const emit = defineEmits<{
   </template>
   <table
     v-else
-    class="min-w-full bg-base-100 border border-base-200 rounded-lg text-base-content"
+    class="min-w-full bg-base-100 border-2 border-base-200 rounded-lg text-base-content"
   >
     <thead>
       <tr class="bg-base-100 border-b">

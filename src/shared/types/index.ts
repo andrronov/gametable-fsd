@@ -36,3 +36,11 @@ export enum Keys {
   PageDown = "PageDown",
   Tab = "Tab",
 }
+
+export const PER_PAGE = [5, 10, 15, 20] as const;
+export type PerPage = (typeof PER_PAGE)[number];
+
+export type ParamQuery = {
+  page: number;
+  perPage: PerPage;
+};
