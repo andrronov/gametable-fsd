@@ -72,6 +72,7 @@ watchEffect(() => {
     />
   </GameModalProvider>
   <Pagination
+    v-if="games.length"
     :pages="possiblePages(perPageQuery)"
     :current="pageQuery"
     :per-page="perPageQuery"
