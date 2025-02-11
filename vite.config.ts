@@ -13,5 +13,5 @@ export default defineConfig({
       "@": resolve("./src"),
     },
   },
-  base: "/gametable-fsd",
+  base: "./",
 });
