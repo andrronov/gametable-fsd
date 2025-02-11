@@ -74,7 +74,7 @@ watchEffect(() => {
   <Pagination
     :pages="possiblePages(perPageQuery)"
     :current="pageQuery"
-    :perPage="perPageQuery"
+    :per-page="perPageQuery"
     class="mt-4"
     @select-per-page="(val) => (perPageQuery = val)"
     @select-page="(page) => (pageQuery = page)"
